@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidGroupProject</string>
+    <string name ="launchMovie">Press to Explore Movie Options</string>
 </resources>
