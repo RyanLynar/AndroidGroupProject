@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,10 +7,17 @@
     tools:context="groupwork.androidgroupproject.MainActivity">
 
     <Button
-        android:id="@+id/movieLaunch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_columnSpan="2"
-        android:layout_rowSpan="3"
-        android:text="@string/launchMovie" />
-</android.widget.GridLayout>
+        android:id="@+id/patientButton"/>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
+
+
+</android.support.constraint.ConstraintLayout>
