@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidGroupProject</string>
+    <string name="patientButton">Patient Intake Form</string>
 </resources>
