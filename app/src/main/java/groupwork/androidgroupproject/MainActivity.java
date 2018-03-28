@@ -36,6 +36,13 @@ public class MainActivity extends Activity {
             Intent in = new Intent(this,MovieDBActivity.class);
             startActivity(in);
         });
-
+        Button patientButton = (Button) findViewById(R.id.patientButton);
+        patientButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ListItemsActivity.class);
+                startActivityForResult(intent, 5);
+            }
+        });
     }
 }
