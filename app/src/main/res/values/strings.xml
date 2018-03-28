@@ -1,6 +1,4 @@
 <resources>
     <string name="app_name">AndroidGroupProject</string>
-    <string name="launchMovie">Press to Explore Movie Options</string>
-    <string name="searchBtn">Find it!</string>
-    <string name="movieHint">Enter a movie name</string>
+    <string name ="launchMovie">Press to Explore Movie Options</string>
 </resources>
