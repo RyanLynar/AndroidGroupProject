@@ -6,10 +6,27 @@
     android:layout_height="match_parent"
     tools:context="groupwork.androidgroupproject.MainActivity">
 
+
     <Button
         android:id="@+id/movieLaunch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_columnSpan="2"
+        android:layout_rowSpan="3"
+        android:text="@string/launchMovie" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/patientButton"/>
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
+
+
         android:layout_columnSpan="2"
         android:layout_rowSpan="3"
         android:text="@string/launchMovie" />
