@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <Button
+            android:paddingTop="50dp"
+            android:drawableTop="@drawable/new_quiz"
+            android:text="Start a New Quiz"
+            android:id="@+id/NewQuizButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:paddingTop="50dp"
+            android:drawableTop="@drawable/existing_quiz"
+            android:text="Load an Existing Quiz"
+            android:id="@+id/ExistingQuizButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

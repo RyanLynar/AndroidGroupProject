@@ -10,7 +10,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/patientButton"/>
+        android:id="@+id/patientButton"
+        android:text="Patient Intake Form"
+        app:layout_constraintTop_toBottomOf="@id/multipleChoiceLaunch"/>
 
     <ProgressBar
         android:layout_width="match_parent"
@@ -18,12 +20,30 @@
         android:id="@+id/progressBar"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/movieLaunch"
+        />
 
     <Button
         android:id="@+id/movieLaunch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/launchMovie" />
+        android:text="@string/launchMovie"
+        app:layout_constraintBottom_toTopOf="@id/multipleChoiceLaunch"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/multipleChoiceLaunch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Multiple Choice Launcher"
+        app:layout_constraintTop_toBottomOf="@id/movieLaunch"/>
+
+    <Button
+        android:id="@+id/busCheckLaunch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OcTranspo Bus Tracker"
+        app:layout_constraintTop_toBottomOf="@id/patientButton"/>
 
 </android.support.constraint.ConstraintLayout>

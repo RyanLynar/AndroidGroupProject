@@ -29,6 +29,14 @@ public class MainActivity extends Activity {
             Intent in = new Intent(this,MovieDBActivity.class);
             startActivity(in);
         });
+        Button multiChoice = findViewById(R.id.multipleChoiceLaunch);
+        multiChoice.setOnClickListener(t->{
+            startActivity(new Intent(this,MultipleChoice.class));
+        });
+        Button busChecker = findViewById(R.id.busCheckLaunch);
+        busChecker.setOnClickListener(t->{
+           // startActivity(new Intent(this,busCheckActivity.class));
+        });
 
     }
 }
