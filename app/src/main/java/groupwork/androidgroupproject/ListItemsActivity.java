@@ -3,6 +3,7 @@ package groupwork.androidgroupproject;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +14,7 @@ public class ListItemsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       //    ListView listView =  findViewById(R.id.listView);
+        setContentView(R.layout.patient_intake);
 
         String[] patientInfo = new String[] { "Name", "Address", "Birthday", "Phone Number",
                 "Health Card Number", "Description of visit"};
@@ -42,7 +43,7 @@ public class ListItemsActivity extends Activity {
                 sb.show();
             });
 */
-        //listAdapter = new ArrayAdapter<String>(this, R.layout.list_items,PatientList);
+        //listAdapter = new ArrayAdapter<String>(this, R.layout.patient_intake,PatientList);
 
         //listView.setAdapter(listAdapter);
 
