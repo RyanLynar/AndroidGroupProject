@@ -2,6 +2,8 @@
     <string name="app_name">AndroidGroupProject</string>
     <string name="patientButton">Patient Intake Form</string>
     <string name="launchMovie">Press to Explore Movie Options</string>
+    <string name="launchBus">Launch Bus Follower</string>
+    <string name="busHint">Enter Stop Number</string>
     <string name="searchBtn">Find it!</string>
     <string name="movieHint">Enter a movie name</string>
 </resources>
