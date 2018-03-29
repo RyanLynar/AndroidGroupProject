@@ -1,5 +1,13 @@
 package groupwork.androidgroupproject;
 
+import android.app.Activity;
+import android.os.Bundle;
 
-class MovieDBActivity {
+public class MovieDBActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_movie_db);
+    }
 }
