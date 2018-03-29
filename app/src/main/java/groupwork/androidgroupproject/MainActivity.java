@@ -26,8 +26,8 @@ public class MainActivity extends Activity {
         });
         movieBtn = findViewById(R.id.movieLaunch);
         movieBtn.setOnClickListener(t-> {
-            //Intent in = new Intent(this,MovieDBActivity.class);
-            //startActivity(in);
+            Intent in = new Intent(this,MovieDBActivity.class);
+            startActivity(in);
         });
         Button patientButton =  findViewById(R.id.patientButton);
         patientButton.setOnClickListener(t -> {
