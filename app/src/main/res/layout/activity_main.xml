@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context="groupwork.androidgroupproject.MainActivity">
 
-
     <Button
         android:id="@+id/movieLaunch"
         android:layout_width="wrap_content"
