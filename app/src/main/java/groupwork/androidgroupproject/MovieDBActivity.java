@@ -21,7 +21,8 @@ public class MovieDBActivity extends Activity {
 
         Button toastBtn = findViewById(R.id.searchBtn);
         toastBtn.setOnClickListener((View t) ->{
-            Toast toast =  Toast.makeText(getApplicationContext(),"One Day I dream of doing something",Toast.LENGTH_SHORT );
+            
+/*           Toast toast =  Toast.makeText(getApplicationContext(),"One Day I dream of doing something",Toast.LENGTH_SHORT );
             toast.setMargin(50,50);
             toast.show();
             Notification customNotification = new NotificationCompat.Builder(getApplicationContext(),"0")
@@ -38,6 +39,6 @@ public class MovieDBActivity extends Activity {
 
             Snackbar sb = Snackbar.make(t,"Hello World",Snackbar.LENGTH_SHORT);
             sb.show();
-        });
+   */     });
     }
 }

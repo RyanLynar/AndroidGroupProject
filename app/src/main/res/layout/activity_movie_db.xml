@@ -22,7 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/SearchField"
         android:layout_weight="0"
-        app:layout_constraintBottom_toTopOf="@id/SearchField" />
+        app:layout_constraintBottom_toTopOf="@id/SearchField" >
+
+    </ListView>
 
     <LinearLayout
         android:id="@+id/SearchField"
@@ -40,11 +42,24 @@
             android:hint="@string/movieHint"
             android:inputType="text" />
 
-        <Button
-            android:id="@+id/searchBtn"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/searchBtn" />
+            android:layout_height="match_parent"
+            android:gravity="bottom|right"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/addMovieBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/addMovieBtn" />
+
+            <Button
+                android:id="@+id/searchBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/searchBtn" />
+        </LinearLayout>
 
     </LinearLayout>
 

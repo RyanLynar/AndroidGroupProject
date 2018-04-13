@@ -20,6 +20,7 @@
         <activity android:name=".busActivity" />
         <activity android:name=".MultipleChoice" />
         <activity android:name=".ListItemsActivity" />
+        <activity android:name=".ExtendedMovieInformationForm"></activity>
     </application>
 
 </manifest>

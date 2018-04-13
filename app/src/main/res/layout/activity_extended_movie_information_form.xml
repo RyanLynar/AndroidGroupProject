@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ExtendedMovieInformationForm">
+
+    <ImageView
+        android:id="@+id/moviePosterImg"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:src="@drawable/no_image_url"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/movieTitleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textAlignment="viewStart"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toRightOf="@id/moviePosterImg"/>
+
+    <TextView
+        android:id="@+id/movieDescText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="desc of the movie, this may also be quite long, don't know what to say about that"
+        app:layout_constraintTop_toBottomOf="@id/moviePosterImg"/>
+
+    <TextView
+        android:id="@+id/movieGenre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="genre"
+        app:layout_constraintTop_toBottomOf="@id/movieRatingImg"
+        app:layout_constraintLeft_toRightOf="@id/moviePosterImg"/>
+
+    <ImageView
+        android:id="@+id/movieRatingImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/movie_ratings0"
+        app:layout_constraintTop_toBottomOf="@id/movieTitleText"
+        app:layout_constraintLeft_toRightOf="@id/moviePosterImg"/>
+</android.support.constraint.ConstraintLayout>

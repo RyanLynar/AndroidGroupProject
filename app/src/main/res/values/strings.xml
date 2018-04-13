@@ -6,4 +6,5 @@
     <string name="busHint">Enter Stop Number</string>
     <string name="searchBtn">Find it!</string>
     <string name="movieHint">Enter a movie name</string>
+    <string name="addMovieBtn">Add a Movie</string>
 </resources>
