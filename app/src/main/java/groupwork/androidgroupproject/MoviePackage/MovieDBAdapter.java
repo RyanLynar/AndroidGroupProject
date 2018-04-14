@@ -1,4 +1,4 @@
-package groupwork.androidgroupproject;
+package groupwork.androidgroupproject.MoviePackage;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -16,7 +16,8 @@ public class MovieDBAdapter extends SQLiteOpenHelper {
     public static final String cLENGTH ="Movie_Length";
     public static final String cGENRE ="Genre";
     public static final String cURL = "URL";
-    public static final int VERSIONNUMBER = 0;
+    public static final String cDESC = "Description";
+    public static final int VERSIONNUMBER = 1;
 
     public MovieDBAdapter(Context cx){
         super(cx,DBNAME,null, VERSIONNUMBER);
@@ -24,14 +25,16 @@ public class MovieDBAdapter extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         db.execSQL(
                 "CREATE TABLE IF NOT EXISTS " + DBTABLE + "( "+ DBKEY + "  INTEGER PRIMARY KEY autoincrement," +
-                        cTITLE +"  varchar(255), " +cACTORS+ "  varchar(255), "+ cRATING+ " Integer, "
-                        + cLENGTH+ " Integer, " + cGENRE+ "  varchar(255), "+ cURL + " varchar(255));");
+                        cTITLE +"  varchar(255), " +cACTORS+ "  varchar(255), "+ cRATING+ " double, "
+                        + cLENGTH+ " integer, " + cGENRE+ "  varchar(255), "+ cURL + " varchar(255),"+ cDESC + " varchar(255));");
 
 
     }
-    public void addItem(String title, String actors, int rating, int len, String genre, String url){
+    public void addItem(String title, String actors, double rating, int len, String genre, String url,String desc){
+        m_DB = this.getWritableDatabase();
         ContentValues inItem = new ContentValues();
         inItem.put(cTITLE,title);
         inItem.put(cACTORS,actors);
@@ -39,10 +42,14 @@ public class MovieDBAdapter extends SQLiteOpenHelper {
         inItem.put(cLENGTH,len);
         inItem.put(cGENRE,genre);
         inItem.put(cURL,url);
+        inItem.put(cDESC,desc);
         m_DB.insert(DBTABLE,null,inItem);
+        m_DB.close();
     }
     public void remItem(int id){
+        m_DB= getWritableDatabase();
         m_DB.delete(DBTABLE,"movieID = ",new String[]{""+id});
+        m_DB.close();
     }
 
 
@@ -57,4 +64,5 @@ public class MovieDBAdapter extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + DBTABLE);
         onCreate(db);
     }
+
 }

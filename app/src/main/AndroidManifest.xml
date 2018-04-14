@@ -16,11 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MovieDBActivity" />
+        <activity android:name=".MoviePackage.MovieDBActivity" />
         <activity android:name=".busActivity" />
         <activity android:name=".MultipleChoice" />
         <activity android:name=".ListItemsActivity" />
-        <activity android:name=".ExtendedMovieInformationForm"></activity>
+        <activity android:name=".MoviePackage.ExtendedMovieInformationForm"/>
+        <activity android:name=".MoviePackage.AddMovieActivity"></activity>
     </application>
 
 </manifest>

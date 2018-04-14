@@ -6,5 +6,24 @@
     <string name="busHint">Enter Stop Number</string>
     <string name="searchBtn">Find it!</string>
     <string name="movieHint">Enter a movie name</string>
-    <string name="addMovieBtn">Add a Movie</string>
+    <string name="titleHint">What Movie was it</string>
+    <string name="genreHint">What type of movie was this?</string>
+    <string name="ratingHint">Enter the movies Rating</string>
+    <string name="urlHint">Enter a URL for the poster</string>
+    <string name="descHint">Enter a brief Description</string>
+    <string name="lengthHint">How long was this movie</string>
+    <string name ="addMovieBtn">Add a movie</string>
+    <string name="confirmBtn">Confirm</string>
+    <string name="cancelBtn">Cancel</string>
+    <string name="mTitle">Title</string>
+    <string name="mGenre">Genre</string>
+    <string name="mRating">Rating</string>
+    <string name="mURL">URL</string>
+    <string name="mDesc">Description</string>
+    <string name="mLength">Duration</string>
+    <string name="delBtn">Delete this entry</string>
+    <string name="actorHint">Who was in this movie</string>
+    <string name="mActors">Actors</string>
+
+
 </resources>

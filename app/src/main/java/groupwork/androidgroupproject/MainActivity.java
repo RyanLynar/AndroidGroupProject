@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import groupwork.androidgroupproject.MoviePackage.MovieDBActivity;
+
 public class MainActivity extends Activity {
     private ProgressBar progress;
     Button movieBtn;
