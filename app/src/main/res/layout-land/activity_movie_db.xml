@@ -14,6 +14,7 @@
 
     <fragment
         android:id="@+id/movieDetails"
+        android:name="groupwork.androidgroupproject.MoviePackage.ExtendedMovieInformationForm"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

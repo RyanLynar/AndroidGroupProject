@@ -2,6 +2,8 @@ package groupwork.androidgroupproject.MoviePackage;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -18,7 +20,7 @@ public class MovieDBAdapter extends SQLiteOpenHelper {
     public static final String cGENRE ="Genre";
     public static final String cURL = "URL";
     public static final String cDESC = "Description";
-    private static final int VERSIONNUMBER = 1;
+    private static final int VERSIONNUMBER = 2;
 
     MovieDBAdapter(Context cx){
         super(cx,DBNAME,null, VERSIONNUMBER);
@@ -28,9 +30,8 @@ public class MovieDBAdapter extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL(
-                "CREATE TABLE IF NOT EXISTS " + DBTABLE + "( "+ DBKEY + "  INTEGER PRIMARY KEY autoincrement," +
-                        cTITLE +"  varchar(255), " +cACTORS+ "  varchar(255), "+ cRATING+ " double, "
-                        + cLENGTH+ " integer, " + cGENRE+ "  varchar(255), "+ cURL + " varchar(255),"+ cDESC + " varchar(255));");
+                "CREATE TABLE IF NOT EXISTS " + DBTABLE + "( " + cTITLE +"  varchar(255), " +cACTORS+ "  varchar(255), "+ cRATING+ " double, "
+                        + cLENGTH+ " integer, " + cGENRE+ "  varchar(255), "+ cURL + " varchar(1000) ,"+ cDESC + " varchar(1000), PRIMARY KEY ("+cTITLE+" ,"+cURL+"));");
 
 
     }
@@ -44,14 +45,18 @@ public class MovieDBAdapter extends SQLiteOpenHelper {
         inItem.put(cGENRE,genre);
         inItem.put(cURL,url);
         inItem.put(cDESC,desc);
-        m_DB.insert(DBTABLE,null,inItem);
+        try {
+            m_DB.insertOrThrow(DBTABLE, null, inItem);
+        }catch(SQLException e){
+
+        }
         m_DB.close();
     }
-    public void remItem(int id){
+    public void remItem(String title, String url){
         m_DB= getWritableDatabase();
-        m_DB.delete(DBTABLE,"movieID = "+id,null);
+        m_DB.delete(DBTABLE,cTITLE+" = ? AND "+cURL+" = ?",new String[]{title,url});
         m_DB.close();
-        Log.i("Delete entry","Del");
+
     }
 
 

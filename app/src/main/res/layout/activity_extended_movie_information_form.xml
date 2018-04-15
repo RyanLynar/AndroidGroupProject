@@ -18,6 +18,8 @@
         android:id="@+id/movieActor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:lines="1"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/movieDescText"
         app:layout_constraintTop_toBottomOf="@id/moviePosterImg" />
 
@@ -25,8 +27,8 @@
         android:id="@+id/movieLengthText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="20dp"
         android:paddingEnd="20dp"
+        android:paddingStart="20dp"
         app:layout_constraintBottom_toTopOf="@+id/movieActor"
         app:layout_constraintLeft_toRightOf="@+id/movieGenre"
         app:layout_constraintTop_toBottomOf="@+id/movieRatingImg" />
@@ -45,6 +47,9 @@
         android:id="@+id/movieDescText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:isScrollContainer="false"
+        android:lines="3"
+        android:scrollbars="vertical"
         app:layout_constraintTop_toBottomOf="@id/movieActor" />
 
     <TextView
@@ -70,6 +75,6 @@
         android:layout_height="wrap_content"
         android:text="@string/delBtn"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movieDescText" />
 </android.support.constraint.ConstraintLayout>

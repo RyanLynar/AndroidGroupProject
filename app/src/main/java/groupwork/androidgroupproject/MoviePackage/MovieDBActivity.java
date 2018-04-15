@@ -11,7 +11,9 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -38,19 +40,39 @@ import groupwork.androidgroupproject.R;
 
 public class MovieDBActivity extends Activity {
     SQLiteDatabase m_db;
+    MovieAdapter adapter;
     public static ArrayList<Movie> movies = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_db);
+        adapter= new MovieAdapter(this,R.id.movieList,movies);
+        ListView movieList = findViewById(R.id.movieList);
+        movieList.setAdapter(adapter);
         Button addMovieBtn = findViewById(R.id.addMovieBtn);
         ConnectivityManager manager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-       if(manager!=null) {
+
+        if(manager!=null) {
            NetworkInfo activeNet = manager.getActiveNetworkInfo();
            if (activeNet != null && activeNet.isConnectedOrConnecting()) {
-               new SiteParser(this).execute();
+               if(savedInstanceState==null)
+                new SiteParser(this).execute();
            }
        }
+        if(this.getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE){
+            movieList.setOnItemClickListener((parent, view, pos, id) -> {
+                movieList.setItemChecked(pos,  true);
+                ExtendedMovieInformationForm fragment = (ExtendedMovieInformationForm) getFragmentManager().findFragmentById(R.id.movieDetails);
+                fragment.setupLayout(findViewById(R.id.movieDetails),pos);
+                getFragmentManager().beginTransaction().replace(R.id.movieDetails,fragment).commit();
+            });
+        }else {
+            movieList.setOnItemClickListener((parent, view, pos, id) -> {
+                Intent in = new Intent(this, ExtendedMovieActivity.class);
+                in.putExtra("listItemPos", pos);
+                startActivity(in);
+            });
+        }
         checkDB();
         addMovieBtn.setOnClickListener(t->{
             Intent in = new Intent(this,AddMovieActivity.class);
@@ -63,47 +85,26 @@ public class MovieDBActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        ListView movieList = findViewById(R.id.movieList);
-        if(this.getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE){
-
-            movieList.setOnItemClickListener((parent, view, pos, id) -> {
-                movieList.setItemChecked(pos,  true);
-                ExtendedMovieInformationForm fragment = (ExtendedMovieInformationForm) getFragmentManager().findFragmentById(R.id.movieDetails);
-                fragment.setupLayout(findViewById(R.id.movieDetails),pos);
-
-
-                getFragmentManager().beginTransaction().replace(R.id.movieDetails,fragment).commit();
-
-
-            });
-        }else {
-            movieList.setOnItemClickListener((parent, view, pos, id) -> {
-                Intent in = new Intent(this, ExtendedMovieActivity.class);
-                in.putExtra("listItemPos", pos);
-                startActivity(in);
-
-            });
-        }
         checkDB();
+        adapter.notifyDataSetChanged();
 
     }
     public void checkDB(){
         MovieDBAdapter dba = new MovieDBAdapter(this);
-        MovieAdapter movieAdapter = new MovieAdapter(this,R.id.movieList,movies);
-
-        ListView movieList= findViewById(R.id.movieList);
-        movieList.setAdapter(movieAdapter);
         m_db = dba.getWritableDatabase();
-        Cursor curse = m_db.rawQuery("SELECT * FROM "+ MovieDBAdapter.DBTABLE +";",null);
+        Cursor curse = m_db.rawQuery("SELECT * FROM "+MovieDBAdapter.DBTABLE+" ;",null);
         curse.moveToFirst();
         while(!curse.isAfterLast()){
-          movies.add(new Movie(curse.getInt(curse.getColumnIndex(MovieDBAdapter.DBKEY)),curse.getString(curse.getColumnIndex(MovieDBAdapter.cTITLE)),curse.getString(curse.getColumnIndex(MovieDBAdapter.cACTORS))
-                  ,curse.getString(curse.getColumnIndex(MovieDBAdapter.cDESC)),curse.getString(curse.getColumnIndex(MovieDBAdapter.cGENRE)),curse.getString(curse.getColumnIndex(MovieDBAdapter.cURL))
-                  ,curse.getDouble(curse.getColumnIndex(MovieDBAdapter.cRATING)), curse.getInt(curse.getColumnIndex(MovieDBAdapter.cLENGTH))));
+           Movie toAdd = new Movie(curse.getString(curse.getColumnIndex(MovieDBAdapter.cTITLE)),curse.getString(curse.getColumnIndex(MovieDBAdapter.cACTORS))
+                    ,curse.getString(curse.getColumnIndex(MovieDBAdapter.cDESC)),curse.getString(curse.getColumnIndex(MovieDBAdapter.cGENRE)),curse.getString(curse.getColumnIndex(MovieDBAdapter.cURL))
+                    ,curse.getDouble(curse.getColumnIndex(MovieDBAdapter.cRATING)), curse.getInt(curse.getColumnIndex(MovieDBAdapter.cLENGTH)));
+            if(!movies.contains(toAdd)) {
+                new ImageGrab().execute(toAdd);
+                movies.add(toAdd);
+                adapter.notifyDataSetChanged();
+            }
             curse.moveToNext();
         }
-        movieAdapter.notifyDataSetChanged();
         curse.close();
         m_db.close();
     }
@@ -126,6 +127,7 @@ public class SiteParser extends AsyncTask<Void,Integer,ArrayList<Movie>>
        @Override
        protected ArrayList<Movie> doInBackground(Void... voids) {
            accessCount = 0;
+           ArrayList<Movie> tempList = new ArrayList<>();
            try {
                URL webHook = new URL("http://torunski.ca/CST2335/MovieInfo.xml");
                URLConnection connecter = webHook.openConnection();
@@ -136,15 +138,13 @@ public class SiteParser extends AsyncTask<Void,Integer,ArrayList<Movie>>
                        if(parser.getName().equals("Movie")){
                            accessCount++;
                            Movie temp = new Movie(title,actors,desc,genre,url,rating,length);
-                           URL tUrl = new URL(url);
-                           URLConnection con  = tUrl.openConnection();
-                           temp.setImg(BitmapFactory.decodeStream(con.getInputStream()));
-                           if(!movies.contains(temp)) {
-                               movies.add(temp);
+                           if(!tempList.contains(temp)) {
+                               tempList.add(temp);
                            }
                        }
                    }
                    if(parser.getName()!=null && parser.getEventType() == XmlPullParser.START_TAG){
+                       publishProgress(0);
                        if(parser.getName().equals("Title") && parser.next() == XmlPullParser.TEXT){
                            title = parser.getText();
                            onProgressUpdate(14);
@@ -182,11 +182,11 @@ public class SiteParser extends AsyncTask<Void,Integer,ArrayList<Movie>>
            } catch (XmlPullParserException e) {
                Log.e("XMLERROR", "DID XML BAD " + e.getMessage());
            }
-        return movies;
+        return tempList;
        }
 
         @Override
-        protected void onPostExecute(ArrayList<Movie> movies) {
+        protected void onPostExecute(ArrayList<Movie> innerMovie) {
            pBar.setVisibility(ProgressBar.INVISIBLE);
             Notification customNotification = new NotificationCompat.Builder(getApplicationContext(),"0")
                     .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -194,7 +194,16 @@ public class SiteParser extends AsyncTask<Void,Integer,ArrayList<Movie>>
                     .setContentText("Loaded "+accessCount+ " items from the web")
                     .setContentTitle("MovieApp")
                     .build();
+            MovieDBAdapter dbadapter = new MovieDBAdapter(con);
+            for(Movie movie : innerMovie){
+                dbadapter.addItem(movie.getTitle(),movie.getActors(),movie.getRating(),movie.getLength(),movie.getGenre(),movie.getURL(),movie.getDesc());
+                new ImageGrab().execute(movie);
+                if(!movies.contains(movie))
+                    movies.add(movie);
+                adapter.notifyDataSetChanged();
+            }
             NotificationManager m = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
             try{
                 if(m!=null) {
                     m.notify("", 0, customNotification);
@@ -208,6 +217,29 @@ public class SiteParser extends AsyncTask<Void,Integer,ArrayList<Movie>>
         protected void onProgressUpdate(Integer... values) {
             pBar = findViewById(R.id.prgBar);
             pBar.setProgress(values[0]);
+        }
+    }
+
+
+    public class ImageGrab extends AsyncTask<Movie,Integer,Movie> {
+
+        @Override
+        protected Movie doInBackground(Movie[] movies) {
+            Movie working = movies[0];
+            try {
+                URL mUrl = new URL(working.getURL());
+                URLConnection urlConnection = mUrl.openConnection();
+                working.setImg(BitmapFactory.decodeStream(urlConnection.getInputStream()));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Movie movie) {
+            adapter.notifyDataSetChanged();
         }
     }
 }

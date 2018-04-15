@@ -7,22 +7,30 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 
 import groupwork.androidgroupproject.R;
 
 public class ExtendedMovieInformationForm extends Fragment {
+    MovieAdapter adapter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.activity_extended_movie_information_form, container, false);
+        if(getActivity()!= null) {
+           adapter = new MovieAdapter(getActivity(), R.id.movieList, MovieDBActivity.movies);
+        }
         if (getArguments() != null) {
             setupLayout(result,getArguments().getInt("listItemPos"));
         }
@@ -36,8 +44,10 @@ public class ExtendedMovieInformationForm extends Fragment {
             TextView genre = result.findViewById(R.id.movieGenre);
             genre.setText(m.getGenre());
             TextView desc = result.findViewById(R.id.movieDescText);
+            desc.setMovementMethod(new ScrollingMovementMethod());
             desc.setText(m.getDesc());
             TextView actors = result.findViewById(R.id.movieActor);
+            actors.setMovementMethod(new ScrollingMovementMethod());
             actors.setText(m.getActors());
             TextView length = result.findViewById(R.id.movieLengthText);
             length.setText("Length:" + m.getLength() + "Min");
@@ -48,8 +58,14 @@ public class ExtendedMovieInformationForm extends Fragment {
             dBtn.setVisibility(View.VISIBLE);
             dBtn.setOnClickListener(t -> {
                 MovieDBAdapter dba = new MovieDBAdapter(result.getContext());
-                dba.remItem(getArguments().getInt("listItemPos"));
-                MovieDBActivity.movies.remove(getArguments().getInt("listItemPos"));
+                if(getActivity() instanceof MovieDBActivity) {
+                    ListView mList = getActivity().findViewById(R.id.movieList);
+                    mList.setAdapter(adapter);
+                }
+                MovieDBActivity.movies.remove(listPos);
+                dba.remItem(m.getTitle(),m.getURL());
+                if(adapter!=null)
+                    adapter.notifyDataSetChanged();
                 Toast alert = Toast.makeText(result.getContext(), "Deleted this Entry", Toast.LENGTH_LONG);
                 alert.show();
             });

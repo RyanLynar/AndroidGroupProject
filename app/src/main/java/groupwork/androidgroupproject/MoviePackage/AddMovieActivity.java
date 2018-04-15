@@ -40,7 +40,6 @@ public class AddMovieActivity extends Activity {
         addMovieBtn.setOnClickListener(t->{
             verify();
             alertText.show();
-
         });
         cancelBtn.setOnClickListener(t-> finish());
 
@@ -62,7 +61,7 @@ public class AddMovieActivity extends Activity {
             resMessage+= "Genre cannot be empty ";
             failFlag= true;
         }
-        if(verifyRating()) {
+        if(!verifyRating()) {
             resMessage += "Rating cannot be empty ";
             failFlag= true;
         }
