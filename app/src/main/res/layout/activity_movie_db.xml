@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context="groupwork.androidgroupproject.MoviePackage.MovieDBActivity">
 
+    <fragment
+        android:id="@+id/movieDetails"
+        android:name="groupwork.androidgroupproject.MoviePackage.ExtendedMovieInformationForm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/itemHolder" />
+
     <LinearLayout
         android:id="@+id/itemHolder"
         android:layout_width="match_parent"
@@ -25,40 +32,12 @@
             android:layout_height="match_parent"
             android:layout_weight="1"/>
 
-        <LinearLayout
-            android:id="@+id/SearchField"
+        <Button
+            android:id="@+id/addMovieBtn"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="4">
-
-            <EditText
-                android:id="@+id/inputText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="@string/movieHint"
-                android:inputType="text" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                tools:layout_editor_absoluteX="384dp">
-
-                <Button
-                    android:id="@+id/addMovieBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/addMovieBtn" />
-
-                <Button
-                    android:id="@+id/searchBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/searchBtn" />
-            </LinearLayout>
-
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="@string/addMovieBtn" />
 
     </LinearLayout>
 

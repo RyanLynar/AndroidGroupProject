@@ -1,5 +1,6 @@
 package groupwork.androidgroupproject;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -11,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class busActivity extends AppCompatActivity {
+public class busActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +30,11 @@ public class busActivity extends AppCompatActivity {
                     .build();
             NotificationManager m = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             try{
-                m.notify("",0,customNotification);
+                if(m!=null) {
+                    m.notify("", 0, customNotification);
+                }
             }catch(NullPointerException e){
-
+                e.printStackTrace();
             }
 
             Snackbar sb = Snackbar.make(t,"Hello World",Snackbar.LENGTH_SHORT);

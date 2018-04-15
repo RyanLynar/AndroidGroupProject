@@ -4,10 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class MovieDBAdapter extends SQLiteOpenHelper {
-    SQLiteDatabase m_DB;
-   public static final String DBNAME = "MovieDB";
+    private SQLiteDatabase m_DB;
+   private static final String DBNAME = "MovieDB";
     public static final String DBTABLE = "Movies";
     public static final String DBKEY = "movieID";
     public static final String cTITLE ="Movie_Title";
@@ -17,9 +18,9 @@ public class MovieDBAdapter extends SQLiteOpenHelper {
     public static final String cGENRE ="Genre";
     public static final String cURL = "URL";
     public static final String cDESC = "Description";
-    public static final int VERSIONNUMBER = 1;
+    private static final int VERSIONNUMBER = 1;
 
-    public MovieDBAdapter(Context cx){
+    MovieDBAdapter(Context cx){
         super(cx,DBNAME,null, VERSIONNUMBER);
     }
 
@@ -48,8 +49,9 @@ public class MovieDBAdapter extends SQLiteOpenHelper {
     }
     public void remItem(int id){
         m_DB= getWritableDatabase();
-        m_DB.delete(DBTABLE,"movieID = ",new String[]{""+id});
+        m_DB.delete(DBTABLE,"movieID = "+id,null);
         m_DB.close();
+        Log.i("Delete entry","Del");
     }
 
 

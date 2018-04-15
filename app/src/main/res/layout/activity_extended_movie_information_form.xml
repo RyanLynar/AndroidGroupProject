@@ -10,38 +10,66 @@
         android:id="@+id/moviePosterImg"
         android:layout_width="128dp"
         android:layout_height="128dp"
-        android:src="@drawable/no_image_url"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintBottom_toTopOf="@id/movieActor"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/missingImg" />
+
+    <TextView
+        android:id="@+id/movieActor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/movieDescText"
+        app:layout_constraintTop_toBottomOf="@id/moviePosterImg" />
+
+    <TextView
+        android:id="@+id/movieLengthText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/movieActor"
+        app:layout_constraintLeft_toRightOf="@+id/movieGenre"
+        app:layout_constraintTop_toBottomOf="@+id/movieRatingImg" />
 
     <TextView
         android:id="@+id/movieTitleText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:singleLine="false"
         android:textAlignment="viewStart"
         android:textSize="30sp"
-        app:layout_constraintLeft_toRightOf="@id/moviePosterImg"/>
+        app:layout_constraintLeft_toRightOf="@id/moviePosterImg"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/movieDescText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="desc of the movie, this may also be quite long, don't know what to say about that"
-        app:layout_constraintTop_toBottomOf="@id/moviePosterImg"/>
+        app:layout_constraintTop_toBottomOf="@id/movieActor" />
 
     <TextView
         android:id="@+id/movieGenre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="genre"
-        app:layout_constraintTop_toBottomOf="@id/movieRatingImg"
-        app:layout_constraintLeft_toRightOf="@id/moviePosterImg"/>
+        app:layout_constraintBottom_toTopOf="@+id/movieActor"
+        app:layout_constraintLeft_toRightOf="@id/moviePosterImg"
+        app:layout_constraintTop_toBottomOf="@id/movieRatingImg" />
 
     <ImageView
         android:id="@+id/movieRatingImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/movie_ratings0"
-        app:layout_constraintTop_toBottomOf="@id/movieTitleText"
-        app:layout_constraintLeft_toRightOf="@id/moviePosterImg"/>
+        app:layout_constraintBottom_toTopOf="@+id/movieGenre"
+        app:layout_constraintLeft_toRightOf="@id/moviePosterImg"
+        app:layout_constraintTop_toBottomOf="@+id/movieTitleText"
+        android:contentDescription="@string/missingImg" />
+
+    <Button
+        android:id="@+id/deleteBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delBtn"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 </android.support.constraint.ConstraintLayout>

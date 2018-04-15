@@ -1,10 +1,14 @@
 package groupwork.androidgroupproject.MoviePackage;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
@@ -15,6 +19,8 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.util.Xml;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -32,32 +38,55 @@ import groupwork.androidgroupproject.R;
 
 public class MovieDBActivity extends Activity {
     SQLiteDatabase m_db;
-    public static ArrayList<Movie> movies = new ArrayList<Movie>();
+    public static ArrayList<Movie> movies = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_db);
         Button addMovieBtn = findViewById(R.id.addMovieBtn);
-
-
+        ConnectivityManager manager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+       if(manager!=null) {
+           NetworkInfo activeNet = manager.getActiveNetworkInfo();
+           if (activeNet != null && activeNet.isConnectedOrConnecting()) {
+               new SiteParser(this).execute();
+           }
+       }
         checkDB();
         addMovieBtn.setOnClickListener(t->{
             Intent in = new Intent(this,AddMovieActivity.class);
             startActivity(in);
         });
 
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        ListView movieList = findViewById(R.id.movieList);
+        if(this.getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE){
+
+            movieList.setOnItemClickListener((parent, view, pos, id) -> {
+                movieList.setItemChecked(pos,  true);
+                ExtendedMovieInformationForm fragment = (ExtendedMovieInformationForm) getFragmentManager().findFragmentById(R.id.movieDetails);
+                fragment.setupLayout(findViewById(R.id.movieDetails),pos);
+
+
+                getFragmentManager().beginTransaction().replace(R.id.movieDetails,fragment).commit();
+
+
+            });
+        }else {
+            movieList.setOnItemClickListener((parent, view, pos, id) -> {
+                Intent in = new Intent(this, ExtendedMovieActivity.class);
+                in.putExtra("listItemPos", pos);
+                startActivity(in);
+
+            });
+        }
         checkDB();
 
-        ConnectivityManager manager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNet = manager.getActiveNetworkInfo();
-        if(activeNet!=null && activeNet.isConnectedOrConnecting()){
-            new SiteParser(this).execute("");
-        }
     }
     public void checkDB(){
         MovieDBAdapter dba = new MovieDBAdapter(this);
@@ -66,21 +95,23 @@ public class MovieDBActivity extends Activity {
         ListView movieList= findViewById(R.id.movieList);
         movieList.setAdapter(movieAdapter);
         m_db = dba.getWritableDatabase();
-        Cursor curse = m_db.rawQuery("SELECT * FROM "+dba.DBTABLE+";",null);
+        Cursor curse = m_db.rawQuery("SELECT * FROM "+ MovieDBAdapter.DBTABLE +";",null);
         curse.moveToFirst();
         while(!curse.isAfterLast()){
-          movies.add(new Movie(curse.getInt(curse.getColumnIndex(dba.DBKEY)),curse.getString(curse.getColumnIndex(dba.cTITLE)),curse.getString(curse.getColumnIndex(dba.cACTORS))
-                  ,curse.getString(curse.getColumnIndex(dba.cDESC)),curse.getString(curse.getColumnIndex(dba.cGENRE)),curse.getString(curse.getColumnIndex(dba.cURL))
-                  ,curse.getDouble(curse.getColumnIndex(dba.cRATING)), curse.getInt(curse.getColumnIndex(dba.cLENGTH))));
+          movies.add(new Movie(curse.getInt(curse.getColumnIndex(MovieDBAdapter.DBKEY)),curse.getString(curse.getColumnIndex(MovieDBAdapter.cTITLE)),curse.getString(curse.getColumnIndex(MovieDBAdapter.cACTORS))
+                  ,curse.getString(curse.getColumnIndex(MovieDBAdapter.cDESC)),curse.getString(curse.getColumnIndex(MovieDBAdapter.cGENRE)),curse.getString(curse.getColumnIndex(MovieDBAdapter.cURL))
+                  ,curse.getDouble(curse.getColumnIndex(MovieDBAdapter.cRATING)), curse.getInt(curse.getColumnIndex(MovieDBAdapter.cLENGTH))));
             curse.moveToNext();
         }
         movieAdapter.notifyDataSetChanged();
         curse.close();
         m_db.close();
     }
-public class SiteParser extends AsyncTask<String,Integer,ArrayList<Movie>>
+public class SiteParser extends AsyncTask<Void,Integer,ArrayList<Movie>>
     {
-        Context con;
+
+       ProgressBar pBar;
+       Context con;
        String title;
        String actors;
        String genre;
@@ -88,12 +119,13 @@ public class SiteParser extends AsyncTask<String,Integer,ArrayList<Movie>>
        String desc;
        double rating;
        int length;
-       public SiteParser(Context c){
+       int accessCount;
+       SiteParser(Context c){
            con= c;
        }
        @Override
-       protected ArrayList<Movie> doInBackground(String... list) {
-
+       protected ArrayList<Movie> doInBackground(Void... voids) {
+           accessCount = 0;
            try {
                URL webHook = new URL("http://torunski.ca/CST2335/MovieInfo.xml");
                URLConnection connecter = webHook.openConnection();
@@ -102,11 +134,14 @@ public class SiteParser extends AsyncTask<String,Integer,ArrayList<Movie>>
                while (parser.next() != XmlPullParser.END_DOCUMENT) {
                    if(parser.getName()!=null&& parser.getEventType()==XmlPullParser.END_TAG){
                        if(parser.getName().equals("Movie")){
+                           accessCount++;
                            Movie temp = new Movie(title,actors,desc,genre,url,rating,length);
                            URL tUrl = new URL(url);
                            URLConnection con  = tUrl.openConnection();
                            temp.setImg(BitmapFactory.decodeStream(con.getInputStream()));
-                           movies.add(temp);
+                           if(!movies.contains(temp)) {
+                               movies.add(temp);
+                           }
                        }
                    }
                    if(parser.getName()!=null && parser.getEventType() == XmlPullParser.START_TAG){
@@ -136,7 +171,6 @@ public class SiteParser extends AsyncTask<String,Integer,ArrayList<Movie>>
                        }
                        else if(parser.getName().equals("URL")){
                            url= parser.getAttributeValue(null,"value");
-
                            onProgressUpdate(100);
                        }
                    }
@@ -153,22 +187,26 @@ public class SiteParser extends AsyncTask<String,Integer,ArrayList<Movie>>
 
         @Override
         protected void onPostExecute(ArrayList<Movie> movies) {
+           pBar.setVisibility(ProgressBar.INVISIBLE);
             Notification customNotification = new NotificationCompat.Builder(getApplicationContext(),"0")
                     .setSmallIcon(R.drawable.ic_launcher_foreground)
                     .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
-                    .setContentText("Loaded "+movies.size()+ " items from the web")
+                    .setContentText("Loaded "+accessCount+ " items from the web")
                     .setContentTitle("MovieApp")
                     .build();
             NotificationManager m = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             try{
-                m.notify("",0,customNotification);
+                if(m!=null) {
+                    m.notify("", 0, customNotification);
+                }
             }catch(NullPointerException e){
+                e.printStackTrace();
             }
-;        }
+        }
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            ProgressBar pBar = findViewById(R.id.prgBar);
+            pBar = findViewById(R.id.prgBar);
             pBar.setProgress(values[0]);
         }
     }

@@ -21,6 +21,7 @@ public class AddMovieActivity extends Activity {
     EditText urlText;
     EditText actorText;
     EditText descText;
+    int finCode = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +42,7 @@ public class AddMovieActivity extends Activity {
             alertText.show();
 
         });
-        cancelBtn.setOnClickListener(t->{
-            finish();
-        });
+        cancelBtn.setOnClickListener(t-> finish());
 
 
     }
@@ -91,6 +90,7 @@ public class AddMovieActivity extends Activity {
             actorText.setText("");
             descText.setText("");
             urlText.setText("");
+            finCode= 1;
         }
         alertText.setText(resMessage);
 

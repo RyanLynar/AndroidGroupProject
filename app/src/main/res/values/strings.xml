@@ -24,6 +24,7 @@
     <string name="delBtn">Delete this entry</string>
     <string name="actorHint">Who was in this movie</string>
     <string name="mActors">Actors</string>
+    <string name="missingImg">No Image</string>
 
 
 </resources>
