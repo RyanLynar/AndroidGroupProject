@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
 
         Button busChecker = findViewById(R.id.busCheckLaunch);
         busChecker.setOnClickListener(t->{
-            startActivity(new Intent(this,busActivity.class));
+            startActivity(new Intent(this,busSearchFunctionActivity.class));
         });
 
 
