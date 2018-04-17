@@ -37,8 +37,6 @@ public class AddPatient extends Activity {
         reasonText = findViewById(R.id.reasonText);
         reasontwoText = findViewById(R.id.reasontwoText);
         Button addDoctor = findViewById(R.id.addDoctor);
-        Button addDentist = findViewById(R.id.addDentist);
-        Button addOptometrist = findViewById(R.id.addOptometrist);
 
 
         addDoctor.setOnClickListener(t->{
@@ -55,37 +53,11 @@ public class AddPatient extends Activity {
         birthText.setText("");
         phoneText.setText("");
         healthText.setText("");
+        descText.setText("");
         reasonText.setText("");
+        reasontwoText.setText("");
+
 
     }
 
- /*   public void addingOptometrist(){
-        PatientDBHelper db = new PatientDBHelper(this);
-        db.addItem(firstText.getText().toString(),addressText.getText().toString(),birthText.getText().toString(),Double.parseDouble(phoneText.getText().toString())
-                ,healthText.getText().toString(),reasonText.getText().toString(),dateBoughtText.getText().toString(),storeText.getText().toString());;
-        firstText.setText("");
-        addressText.setText("");
-        birthText.setText("");
-        phoneText.setText("");
-        healthText.setText("");
-        reasonText.setText("");
-        dateBoughtText.setText("");
-        storeText.setText("");
-
-    }
-
-    public void addingDentist(){
-        PatientDBHelper db = new PatientDBHelper(this);
-        db.addItem(firstText.getText().toString(),addressText.getText().toString(),birthText.getText().toString(),Double.parseDouble(phoneText.getText().toString()),
-                healthText.getText().toString(),reasonText.getText().toString(),benefitsText.getText().toString(),bracesText.getText().toString());
-        firstText.setText("");
-        addressText.setText("");
-        birthText.setText("");
-        phoneText.setText("");
-        healthText.setText("");
-        reasonText.setText("");
-        benefitsText.setText("");
-        bracesText.setText("");
-
-    }*/
 }

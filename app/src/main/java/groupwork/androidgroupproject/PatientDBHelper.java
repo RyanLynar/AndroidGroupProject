@@ -8,16 +8,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class PatientDBHelper extends SQLiteOpenHelper {
     SQLiteDatabase patientDB;
     public static final String DBNAME = "PatientFormDB";
-    public static final String PTABLE = "DoctorTableCreate";
+    public static final String PTABLE = "TableCreate";
     public static final String PATIENTKEY = "PatientKey";
     public static final String cName ="First_Name";
     public static final String cAddress ="Address";
     public static final String cBirthday ="Birthday";
     public static final String cPhoneNumber ="Phone_Number";
     public static final String cHealthCard = "Health_Card";
-    public static final String cDesc = "Reason";
+    public static final String cDesc = "Description";
     public static final String cReason = "Reason";
-    public static final String cReasonTwo = "Reason";
+    public static final String cReasonTwo = "ReasonTwo";
     public static final int VERSIONNUMBER = 1;
 
     public PatientDBHelper(Context ctx){
