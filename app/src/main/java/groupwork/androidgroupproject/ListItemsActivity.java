@@ -1,50 +1,68 @@
 package groupwork.androidgroupproject;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Movie;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static groupwork.androidgroupproject.PatientDBHelper.PTABLE;
+import groupwork.androidgroupproject.R;
+
 
 public class ListItemsActivity extends Activity {
-    private ArrayAdapter<String> listAdapter ;
+    SQLiteDatabase patientDB;
+    PatientAdapter patientAdapter;
+    public static ArrayList<Patient> patients = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       //    ListView listView =  findViewById(R.id.listView);
-
-        String[] patientInfo = new String[] { "Name", "Address", "Birthday", "Phone Number",
-                "Health Card Number", "Description of visit"};
-        ArrayList<String> PatientList = new ArrayList<String>();
-        PatientList.addAll( Arrays.asList(patientInfo) );
-
-           /* Button toastBtn = findViewById(R.id.someBtn);
-
-            toastBtn.setOnClickListener((View t) -> {
-                Toast toast = Toast.makeText(getApplicationContext(), "One Day I dream of doing something", Toast.LENGTH_SHORT);
-                toast.setMargin(50, 50);
-                toast.show();
-                Notification customNotification = new NotificationCompat.Builder(getApplicationContext(), "0")
-                        .setSmallIcon(R.drawable.ic_launcher_foreground)
-                        .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
-                        .setContentText("But not yet")
-                        .build();
-                NotificationManager m = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                try {
-                    m.notify("", 0, customNotification);
-                } catch (NullPointerException e) {
-
-                }
-
-                Snackbar sb = Snackbar.make(t, "Hello World", Snackbar.LENGTH_SHORT);
-                sb.show();
-            });
-*/
-        //listAdapter = new ArrayAdapter<String>(this, R.layout.list_items,PatientList);
-
-        //listView.setAdapter(listAdapter);
+        setContentView(R.layout.patient_db);
+        patientAdapter = new PatientAdapter(this,R.id.patientList,patients);
+        ListView patientList = findViewById(R.id.patientList);
+        patientList.setAdapter(patientAdapter);
+        Button addPatient = findViewById(R.id.patientAdding);
+        addPatient.setOnClickListener(v -> {
+            Intent intent = new Intent(this  , AddPatient.class);
+            startActivity(intent);
+        });
+    }
+    protected void onResume() {
+        super.onResume();
+        checkDB();
+        patientAdapter.notifyDataSetChanged();
 
     }
-}
+
+    public void checkDB(){
+        PatientDBHelper db = new PatientDBHelper(this);
+        patientDB = db.getWritableDatabase();
+            Cursor crsor = patientDB.rawQuery("SELECT * FROM "+ PatientDBHelper.PTABLE+";",null);
+            crsor.moveToFirst();
+            while(!crsor.isAfterLast()){
+                patients.add(new Patient(crsor.getInt(crsor.getColumnIndex(db.PATIENTKEY)),crsor.getString(crsor.getColumnIndex(db.cName))
+                        ,crsor.getString(crsor.getColumnIndex(db.cAddress))
+                        ,crsor.getString(crsor.getColumnIndex(db.cBirthday)),crsor.getDouble(crsor.getColumnIndex(db.cPhoneNumber))
+                        ,crsor.getString(crsor.getColumnIndex(db.cHealthCard))
+                        ,crsor.getString(crsor.getColumnIndex(db.cDesc)), crsor.getString(crsor.getColumnIndex(db.cReason))
+                        , crsor.getString(crsor.getColumnIndex(db.cReasonTwo))));
+                crsor.moveToNext();
+            }
+            patientAdapter.notifyDataSetChanged();
+            crsor.close();
+            patientDB.close();
+
+
+    }
+
+    }
+
