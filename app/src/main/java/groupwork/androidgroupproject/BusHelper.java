@@ -48,6 +48,7 @@ public class BusHelper
     {
         RouteNumberToSearch= INrouteNumToSearch;
         RouteDirectionToSearch= INrouteDirToSearch;
+        Log.i("Search",  INrouteDirToSearch + Integer.toString(INrouteNumToSearch));
     }
 
     public ArrayList<BusRouteInfo> getRoutesForLockedStopNum()
@@ -162,6 +163,7 @@ public class BusHelper
                                 if (parser.getEventType() != XmlPullParser.START_TAG) {
                                 } else if (parser.getName().equals("Direction")) {
                                     Direction = parser.nextText();
+                                    Log.i("SEARCH",Direction);
                                 } else if (Direction.equals(RouteDirectionToSearch)) {
                                     if (parser.getName().equals("TripDestination")) {
                                         returnArray.add(new BusTripInfo());
@@ -176,7 +178,7 @@ public class BusHelper
                                         returnArray.get(returnArray.size() - 1).Longitude = Double.parseDouble(parser.nextText());
                                     } else if (parser.getName().equals("GPSSpeed")) {
                                         returnArray.get(returnArray.size() - 1).Speed = Double.parseDouble(parser.nextText());
-
+                                        Log.i("SEARCH",returnArray.get(returnArray.size()-1).toString());
                                     }
                                 }
                             }

@@ -69,14 +69,16 @@ public class busSearchFunctionActivity extends AppCompatActivity {
 
         ArrayList<BusHelper.BusRouteInfo> routes = BusHelper.getInstance().getSavedRoutes();
         ListView busListView = findViewById(R.id.busListView);
-        SearchingAdapter adapter = new SearchingAdapter(this,R.id.busListView,routes);
+        Context ctx = this;
+        SearchingAdapter adapter = new SearchingAdapter(ctx,R.id.busListView,routes);
         busListView.setAdapter(adapter);
         busListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                                @Override
                                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                                   Log.i("CLICK","CLICK");
                                                     BusHelper.getInstance().LockStopNumber(routes.get(i).stopNumber);
                                                     BusHelper.getInstance().LockRoute(routes.get(i).routeNumber,routes.get(i).direction);
-                                                   Intent in = new Intent(getApplicationContext(),busTripActivity.class);
+                                                   Intent in = new Intent(ctx,busTripActivity.class);
                                                    startActivity(in);
                                                }});
 

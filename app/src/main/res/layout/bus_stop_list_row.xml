@@ -31,6 +31,7 @@
         android:layout_height="35dp"
         android:layout_weight="1"
         android:id="@+id/bus_btn"
+        android:focusable="false"
         android:text="DEL"
         />
 

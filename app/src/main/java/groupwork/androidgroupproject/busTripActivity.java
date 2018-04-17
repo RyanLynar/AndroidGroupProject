@@ -24,6 +24,7 @@ public class busTripActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bus_trip);
+        SetupListView();
     }
 
     private void SetupListView()
