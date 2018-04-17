@@ -12,6 +12,7 @@ import android.widget.TextView;
 /**
  * Created by DellPC on 4/15/2018.
  */
+import groupwork.androidgroupproject.R;
 
 public class AddPatient extends Activity {
 
@@ -42,6 +43,7 @@ public class AddPatient extends Activity {
         addDoctor.setOnClickListener(t->{
             addingPatient();
         });
+
     }
 
     public void addingPatient(){
@@ -56,8 +58,6 @@ public class AddPatient extends Activity {
         descText.setText("");
         reasonText.setText("");
         reasontwoText.setText("");
-
-
     }
 
 }
