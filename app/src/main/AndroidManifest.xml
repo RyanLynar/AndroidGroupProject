@@ -20,6 +20,8 @@
         <activity android:name=".busActivity" />
         <activity android:name=".MultipleChoice" />
         <activity android:name=".ListItemsActivity" />
+        <activity android:name=".AddPatient"/>
+
     </application>
 
 </manifest>
