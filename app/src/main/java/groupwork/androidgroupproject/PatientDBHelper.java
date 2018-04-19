@@ -18,7 +18,7 @@ public class PatientDBHelper extends SQLiteOpenHelper {
     public static final String cDesc = "Description";
     public static final String cReason = "Reason";
     public static final String cReasonTwo = "ReasonTwo";
-    public static final int VERSIONNUMBER = 1;
+    public static final int VERSIONNUMBER = 4;
 
     public PatientDBHelper(Context ctx){
         super(ctx,DBNAME,null, VERSIONNUMBER);

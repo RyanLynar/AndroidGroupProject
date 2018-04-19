@@ -20,6 +20,7 @@ import java.util.List;
 import groupwork.androidgroupproject.R;
 
 public class PatientAdapter extends ArrayAdapter<Patient> {
+    private Patient patient;
     public PatientAdapter(@NonNull Context context, int resource, @NonNull List<Patient> objects) {
         super(context, resource, objects);
     }
@@ -27,7 +28,7 @@ public class PatientAdapter extends ArrayAdapter<Patient> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        Patient patient = getItem(position);
+        patient = getItem(position);
 
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_patient_list,parent,false);

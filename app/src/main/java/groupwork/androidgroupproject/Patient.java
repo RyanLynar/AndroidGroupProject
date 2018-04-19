@@ -35,7 +35,7 @@ public class Patient {
         return patientName;
     }
 
-    public String getName(){return patientName;}
+   // public String getName(){return patientName;}
     public String getAddress(){return patientAddress;}
     public String getBirth(){return patientBirth;}
     public double getPhone(){return patientPhone;}
@@ -53,7 +53,7 @@ public class Patient {
         return false;
     }
     public String toString(){
-        return this.getName() +" " + this.getAddress() +" " + this.getBirth() +" " + this.getPhone() +" " + this.getHealth() +" " + this.getDesc() +" " + this.getReason()
+        return this.getFName() +" " + this.getAddress() +" " + this.getBirth() +" " + this.getPhone() +" " + this.getHealth() +" " + this.getDesc() +" " + this.getReason()
                 +" "+ this.getReasonTwo();
     }
 }

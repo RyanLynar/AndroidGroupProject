@@ -49,18 +49,22 @@ public class ListItemsActivity extends Activity {
             Cursor crsor = patientDB.rawQuery("SELECT * FROM "+ PatientDBHelper.PTABLE+";",null);
             crsor.moveToFirst();
             while(!crsor.isAfterLast()){
-                patients.add(new Patient(crsor.getInt(crsor.getColumnIndex(db.PATIENTKEY)),crsor.getString(crsor.getColumnIndex(db.cName))
+                Patient p =  new Patient(crsor.getInt(crsor.getColumnIndex(db.PATIENTKEY)),crsor.getString(crsor.getColumnIndex(db.cName))
                         ,crsor.getString(crsor.getColumnIndex(db.cAddress))
                         ,crsor.getString(crsor.getColumnIndex(db.cBirthday)),crsor.getDouble(crsor.getColumnIndex(db.cPhoneNumber))
                         ,crsor.getString(crsor.getColumnIndex(db.cHealthCard))
                         ,crsor.getString(crsor.getColumnIndex(db.cDesc)), crsor.getString(crsor.getColumnIndex(db.cReason))
-                        , crsor.getString(crsor.getColumnIndex(db.cReasonTwo))));
+                        , crsor.getString(crsor.getColumnIndex(db.cReasonTwo)));
+                if(!patients.contains(p)){
+                    patients.add(p);
+                    patientAdapter.notifyDataSetChanged();
+                }
+
                 crsor.moveToNext();
             }
             patientAdapter.notifyDataSetChanged();
             crsor.close();
             patientDB.close();
-
 
     }
 
