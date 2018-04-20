@@ -22,9 +22,9 @@ public class MainActivity extends Activity {
         progress.setVisibility(View.VISIBLE);
 
         Button patientButton = findViewById(R.id.patientButton);
-        patientButton.setOnClickListener(t->{
-            startActivity(new Intent(this,ListItemsActivity.class));
-
+        patientButton.setOnClickListener(t-> {
+                    startActivity(new Intent(this, ListItemsActivity.class));
+                });
         movieBtn = findViewById(R.id.movieLaunch);
         movieBtn.setOnClickListener(t-> {
             Intent in = new Intent(this,MovieDBActivity.class);
