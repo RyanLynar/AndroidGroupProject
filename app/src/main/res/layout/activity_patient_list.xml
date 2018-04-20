@@ -13,11 +13,6 @@
 "
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/movieImg"
-            android:layout_width="88dp"
-            android:layout_height="32dp"
-            android:layout_weight="1"></ImageView>
 
         <TextView
             android:id="@+id/patientTitle"

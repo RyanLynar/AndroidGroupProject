@@ -19,7 +19,7 @@ public class Patient {
     }
 
 
-    Patient(int id,String name, String address, String birth, double phone, String health, String desc, String reason, String reasonTwo) {
+    Patient(int id, String name, String address, String birth, double phone, String health, String desc, String reason, String reasonTwo) {
         patientName=name;
         patientAddress=address;
         patientBirth=birth;
@@ -35,7 +35,7 @@ public class Patient {
         return patientName;
     }
 
-   // public String getName(){return patientName;}
+    public String getName(){return patientName;}
     public String getAddress(){return patientAddress;}
     public String getBirth(){return patientBirth;}
     public double getPhone(){return patientPhone;}

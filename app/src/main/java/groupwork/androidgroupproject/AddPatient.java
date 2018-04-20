@@ -38,9 +38,17 @@ public class AddPatient extends Activity {
         reasonText = findViewById(R.id.reasonText);
         reasontwoText = findViewById(R.id.reasontwoText);
         Button addDoctor = findViewById(R.id.addDoctor);
-
+        Button addDentist = findViewById(R.id.addDentist);
+        Button addOptometrist = findViewById(R.id.addOptometrist);
 
         addDoctor.setOnClickListener(t->{
+            addingPatient();
+        });
+
+        addDentist.setOnClickListener(t->{
+            addingPatient();
+        });
+        addOptometrist.setOnClickListener(t->{
             addingPatient();
         });
 

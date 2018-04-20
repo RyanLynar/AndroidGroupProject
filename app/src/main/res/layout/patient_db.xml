@@ -32,6 +32,19 @@
             android:layout_height="wrap_content"
             android:text="Add Patient"/>
 
+        <Button
+            android:id="@+id/checkButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Check XML"/>
+
+
+        <Button
+            android:id="@+id/delPatient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"/>
+
     </LinearLayout>
 
 
