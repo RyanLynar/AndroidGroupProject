@@ -1,7 +1,12 @@
 package groupwork.androidgroupproject;
 
+<<<<<<< HEAD
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+=======
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+>>>>>>> master
 
 public class NewQuiz extends AppCompatActivity {
 
