@@ -23,9 +23,7 @@ public class MainActivity extends Activity {
 
         Button patientButton = findViewById(R.id.patientButton);
         patientButton.setOnClickListener(t->{
-                Intent intent = new Intent(MainActivity.this, ListItemsActivity.class);
-                startActivity(intent);
-        });
+            startActivity(new Intent(this,ListItemsActivity.class));
 
         movieBtn = findViewById(R.id.movieLaunch);
         movieBtn.setOnClickListener(t-> {

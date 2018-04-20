@@ -27,6 +27,8 @@
         <activity android:name=".busTripActivity" />
         <activity android:name=".MoviePackage.ExtendedMovieActivity"/>
         <activity android:name=".MoviePackage.AddMovieActivity" />
+        <activity android:name=".AddPatient"/>
+
     </application>
 
 </manifest>
