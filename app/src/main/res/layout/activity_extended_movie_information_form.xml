@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MoviePackage.ExtendedMovieInformationForm">
+
+    <ImageView
+        android:id="@+id/moviePosterImg"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        app:layout_constraintBottom_toTopOf="@id/movieActor"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/missingImg" />
+
+    <TextView
+        android:id="@+id/movieActor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/movieDescText"
+        app:layout_constraintTop_toBottomOf="@id/moviePosterImg" />
+
+    <TextView
+        android:id="@+id/movieLengthText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/movieActor"
+        app:layout_constraintLeft_toRightOf="@+id/movieGenre"
+        app:layout_constraintTop_toBottomOf="@+id/movieRatingImg" />
+
+    <TextView
+        android:id="@+id/movieTitleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:singleLine="false"
+        android:textAlignment="viewStart"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toRightOf="@id/moviePosterImg"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/movieDescText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:isScrollContainer="false"
+        android:lines="3"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@id/movieActor" />
+
+    <TextView
+        android:id="@+id/movieGenre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/movieActor"
+        app:layout_constraintLeft_toRightOf="@id/moviePosterImg"
+        app:layout_constraintTop_toBottomOf="@id/movieRatingImg" />
+
+    <ImageView
+        android:id="@+id/movieRatingImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/movieGenre"
+        app:layout_constraintLeft_toRightOf="@id/moviePosterImg"
+        app:layout_constraintTop_toBottomOf="@+id/movieTitleText"
+        android:contentDescription="@string/missingImg" />
+
+    <Button
+        android:id="@+id/deleteBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delBtn"
+        android:visibility="invisible"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movieDescText" />
+</android.support.constraint.ConstraintLayout>
