@@ -188,12 +188,12 @@ public class SiteParser extends AsyncTask<Void,Integer,ArrayList<Movie>>
         @Override
         protected void onPostExecute(ArrayList<Movie> innerMovie) {
            pBar.setVisibility(ProgressBar.INVISIBLE);
-            Notification customNotification = new NotificationCompat.Builder(getApplicationContext(),"0")
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
-                    .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
-                    .setContentText("Loaded "+accessCount+ " items from the web")
-                    .setContentTitle("MovieApp")
-                    .build();
+            //Notification customNotification = new NotificationCompat.Builder(getApplicationContext(),"0")
+            //        .setSmallIcon(R.drawable.ic_launcher_foreground)
+            //        .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
+            //        .setContentText("Loaded "+accessCount+ " items from the web")
+            //        .setContentTitle("MovieApp")
+            //        .build();
             MovieDBAdapter dbadapter = new MovieDBAdapter(con);
             for(Movie movie : innerMovie){
                 dbadapter.addItem(movie.getTitle(),movie.getActors(),movie.getRating(),movie.getLength(),movie.getGenre(),movie.getURL(),movie.getDesc());
@@ -202,15 +202,15 @@ public class SiteParser extends AsyncTask<Void,Integer,ArrayList<Movie>>
                     movies.add(movie);
                 adapter.notifyDataSetChanged();
             }
-            NotificationManager m = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-            try{
-                if(m!=null) {
-                    m.notify("", 0, customNotification);
-                }
-            }catch(NullPointerException e){
-                e.printStackTrace();
-            }
+            //NotificationManager m = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//
+            //try{
+            //    if(m!=null) {
+            //        m.notify("", 0, customNotification);
+            //    }
+            //}catch(NullPointerException e){
+            //    e.printStackTrace();
+            //}
         }
 
         @Override

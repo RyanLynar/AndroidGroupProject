@@ -24,6 +24,7 @@
         <activity android:name=".MultipleChoice" />
         <activity android:name=".ListItemsActivity" />
         <activity android:name=".busStopActivity" />
+        <activity android:name=".busTripActivity" />
         <activity android:name=".MoviePackage.ExtendedMovieActivity"/>
         <activity android:name=".MoviePackage.AddMovieActivity" />
     </application>
