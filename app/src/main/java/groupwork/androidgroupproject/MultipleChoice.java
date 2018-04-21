@@ -1,12 +1,10 @@
 package groupwork.androidgroupproject;
 
 import android.app.Activity;
-<<<<<<< HEAD
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-=======
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -17,8 +15,6 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
->>>>>>> master
-
 /**
  * Created by Adam on 2018-03-28.
  */
@@ -36,17 +32,15 @@ public class MultipleChoice extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiple_choice);
 
-        newQuiz=(Button)findViewById(R.id.NewQuizButton);
-        existingQuiz=(Button)findViewById(R.id.ExistingQuizButton);
+        newQuiz= findViewById(R.id.NewQuizButton);
+        existingQuiz= findViewById(R.id.ExistingQuizButton);
 
         newQuiz.setOnClickListener(t->{
-<<<<<<< HEAD
             Log.i(ACTIVITY_NAME,"User clicked 'new quiz'");
 
             intent = new Intent(MultipleChoice.this, NewQuiz.class);
             startActivity(intent);
         });
-=======
                 Toast toast =  Toast.makeText(getApplicationContext(),"One Day I dream of doing something",Toast.LENGTH_SHORT );
                 toast.setMargin(50,50);
                 toast.show();
@@ -62,11 +56,10 @@ public class MultipleChoice extends Activity {
 
                 }
 
-                Snackbar sb = Snackbar.make(t,"Hello World",Snackbar.LENGTH_SHORT);
-                sb.show();
-            });
+//                Snackbar sb = Snackbar.make(getApplicationContext(),"Hello World",Snackbar.LENGTH_SHORT);
+//                sb.show();
+//            });
 
->>>>>>> master
 
         existingQuiz.setOnClickListener(t->{
             Log.i(ACTIVITY_NAME,"User clicked 'existing quiz'");
