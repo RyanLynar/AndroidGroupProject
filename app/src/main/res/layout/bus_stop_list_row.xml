@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_weight="1"
+        android:id="@+id/bus_number"
+        android:text="Bus#" />
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="35dp"
+    android:layout_weight="3"
+    android:id="@+id/bus_desc"
+    android:text="Bus Route Desc." />
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="35dp"
+    android:layout_weight="1"
+    android:id="@+id/route_dir"
+    android:text="Eastbound" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_weight="1"
+        android:id="@+id/stop_num"
+        android:text="Stop#" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_weight="1"
+        android:id="@+id/bus_btn"
+        android:focusable="false"
+        android:text="DEL"
+        />
+
+</LinearLayout>

@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import groupwork.androidgroupproject.MoviePackage.MovieDBActivity;
+
 public class MainActivity extends Activity {
     private ProgressBar progress;
     Button movieBtn;
@@ -20,11 +22,9 @@ public class MainActivity extends Activity {
         progress.setVisibility(View.VISIBLE);
 
         Button patientButton = findViewById(R.id.patientButton);
-        patientButton.setOnClickListener(t->{
-                Intent intent = new Intent(MainActivity.this, ListItemsActivity.class);
-                startActivity(intent);
-        });
-
+        patientButton.setOnClickListener(t-> {
+                    startActivity(new Intent(this, ListItemsActivity.class));
+                });
         movieBtn = findViewById(R.id.movieLaunch);
         movieBtn.setOnClickListener(t-> {
             Intent in = new Intent(this,MovieDBActivity.class);
@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
 
         Button busChecker = findViewById(R.id.busCheckLaunch);
         busChecker.setOnClickListener(t->{
-            startActivity(new Intent(this,busActivity.class));
+            startActivity(new Intent(this,busSearchFunctionActivity.class));
         });
 
 

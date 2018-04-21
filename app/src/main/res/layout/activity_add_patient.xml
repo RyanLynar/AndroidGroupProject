@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/firstText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/addressText"
+            android:layout_below="@+id/firstText"
+            android:hint="Address"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/birthText"
+            android:layout_below="@+id/addressText"
+            android:hint="Birthday"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/phoneText"
+            android:layout_below="@+id/birthText"
+            android:hint="Phone Number"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/healthText"
+            android:layout_below="@+id/phoneText"
+            android:hint="Health Card"/>
+
+        <EditText
+                android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/descText"
+            android:layout_below="@+id/healthText"
+            android:hint="Reason for Visit"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/reasonText"
+            android:layout_below="@+id/descText"
+            android:hint="Condition #1"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/reasontwoText"
+            android:layout_below="@+id/reasonText"
+            android:hint="Condition #2" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addDoctor"
+            android:text="Add Doctor"
+            android:layout_below="@+id/reasontwoText"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addDentist"
+            android:text="Add Dentist" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addOptometrist"
+            android:text="Add Optometrist" />
+
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

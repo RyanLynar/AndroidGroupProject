@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"    android:orientation="horizontal">
+    <!--RouteHeading, Latitude, Longitude, GPSSpeed, TripStartTime, AdjustedScheduleTime-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_weight="3"
+        android:id="@+id/busRouteHeading"
+        android:text="Bus Route Desc." />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_weight="1"
+        android:id="@+id/busLongitude"
+        android:text="Long" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_weight="1"
+        android:id="@+id/busLatitude"
+        android:text="Lat" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_weight="1"
+        android:id="@+id/bus_gpsspeed"
+        android:text="Speed" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_weight="1"
+        android:id="@+id/bus_tripStartTime"
+        android:text="StartTime" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_weight="1"
+        android:id="@+id/bus_adjustedScheduleTime"
+        android:text="Adj." />
+
+</LinearLayout>
